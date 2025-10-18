@@ -9,7 +9,7 @@ const openrouterApi = axios.create({
     headers: {
         'Authorization': `Bearer ${import.meta.env.VITE_OPENROUTER_API_KEY}`,
         'Content-Type': 'application/json',
-        'HTTP-Referer': 'http://localhost:5174',
+        'HTTP-Referer': 'https://punto-parrilla-ia.vercel.app',
         'X-Title': 'Punto Parrilla IA'
     }
 })
