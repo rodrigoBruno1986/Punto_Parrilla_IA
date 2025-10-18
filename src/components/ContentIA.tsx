@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
-import type { PreguntaIA, RespuestaIA } from '../types/ia'
+import type { PreguntaIA } from '../types/ia'
 import { enviarPreguntaIA } from '../services/iaService'
 
 // Función para convertir URLs en enlaces clickeables
