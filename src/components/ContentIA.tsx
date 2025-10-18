@@ -2,13 +2,105 @@ import { useState, useEffect, useRef } from 'react'
 import type { PreguntaIA } from '../types/ia'
 import { enviarPreguntaIA } from '../services/iaService'
 
-// Función para convertir URLs en enlaces clickeables
+// Función para formatear texto con enlaces clickeables y mejor formato
 const formatTextWithLinks = (text: string) => {
-  // Primero quitamos los corchetes que rodean las URLs
+  // Primero, quitar corchetes alrededor de URLs
   const textWithoutBrackets = text.replace(/\[(https?:\/\/[^\]]+)\]/g, '$1')
   
+  // Dividir el texto en líneas para mejor formato
+  const lines = textWithoutBrackets.split('\n')
+  
+  return lines.map((line, lineIndex) => {
+    // Detectar tablas (líneas con |)
+    if (line.includes('|') && line.trim().length > 0) {
+      return (
+        <div key={lineIndex} className="mb-2">
+          {formatTableLine(line)}
+        </div>
+      )
+    }
+    
+    // Detectar títulos con paréntesis (como "Ingredientes (1 copa)")
+    const isTitleWithParentheses = /^[A-Za-z\s]+\(\d+[^)]*\)/.test(line.trim())
+    if (isTitleWithParentheses) {
+      return (
+        <div key={lineIndex} className="mb-3">
+          <h4 className="text-lg font-semibold text-blue-700 mb-2">
+            {formatLineWithLinks(line)}
+          </h4>
+        </div>
+      )
+    }
+    
+    // Detectar subtítulos (como "Pasos", "Tips de barra")
+    const isSubtitle = /^[A-Za-z\s]+$/.test(line.trim()) && line.trim().length > 0 && lineIndex > 0
+    if (isSubtitle && !line.includes('|') && !line.includes('•') && !line.includes('-')) {
+      return (
+        <div key={lineIndex} className="mb-2 mt-4">
+          <h5 className="text-md font-semibold text-gray-700 mb-2">
+            {formatLineWithLinks(line)}
+          </h5>
+        </div>
+      )
+    }
+    
+    // Detectar si la línea es una lista con viñetas
+    const isBulletPoint = /^[\s]*[-*•]\s/.test(line)
+    const isNumberedList = /^[\s]*\d+\.\s/.test(line)
+    
+    if (isBulletPoint || isNumberedList) {
+      return (
+        <div key={lineIndex} className="ml-4 mb-1 flex items-start">
+          <span className="mr-2 text-blue-600 font-bold">
+            {isBulletPoint ? '•' : line.match(/^\s*(\d+\.)/)?.[1]}
+          </span>
+          <span className="flex-1">
+            {formatLineWithLinks(line.replace(/^[\s]*[-*•]\s|^[\s]*\d+\.\s/, ''))}
+          </span>
+        </div>
+      )
+    }
+    
+    // Si la línea está vacía, agregar espacio
+    if (line.trim() === '') {
+      return <div key={lineIndex} className="h-2"></div>
+    }
+    
+    // Línea normal
+    return (
+      <div key={lineIndex} className="mb-2">
+        {formatLineWithLinks(line)}
+      </div>
+    )
+  })
+}
+
+// Función para formatear líneas de tabla
+const formatTableLine = (line: string) => {
+  const cells = line.split('|').map(cell => cell.trim()).filter(cell => cell.length > 0)
+  
+  if (cells.length === 0) return null
+  
+  // Si es una línea separadora (contiene solo guiones)
+  if (cells.every(cell => /^-+$/.test(cell))) {
+    return <div className="border-b border-gray-300 my-2"></div>
+  }
+  
+  return (
+    <div className="grid grid-cols-2 gap-4 py-2 border-b border-gray-100">
+      {cells.map((cell, index) => (
+        <div key={index} className="text-sm">
+          {formatLineWithLinks(cell)}
+        </div>
+      ))}
+    </div>
+  )
+}
+
+// Función auxiliar para formatear enlaces en una línea
+const formatLineWithLinks = (line: string) => {
   const urlRegex = /(https?:\/\/[^\s]+)/g
-  const parts = textWithoutBrackets.split(urlRegex)
+  const parts = line.split(urlRegex)
   
   return parts.map((part, index) => {
     if (part.match(urlRegex)) {
@@ -37,18 +129,31 @@ function ContentIA() {
 
   // Scroll automático hacia abajo cuando cambia el contenido
   useEffect(() => {
-    // Solo hacer scroll si hay contenido y no está cargando
-    if ((conversacion.length > 0 || respuestaStreaming) && !isLoading) {
+    // Hacer scroll cuando hay conversación o cuando está escribiendo
+    if (conversacion.length > 0 || respuestaStreaming) {
       const timer = setTimeout(() => {
         chatEndRef.current?.scrollIntoView({ behavior: 'smooth' })
-      }, 300) // Delay más largo para evitar parpadeo
+      }, 100) // Reducido para mejor respuesta
       
       return () => clearTimeout(timer)
     }
-  }, [conversacion.length, respuestaStreaming, isLoading])
+  }, [conversacion.length, respuestaStreaming])
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInput(e.target.value)
+  }
+
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault()
+      console.log('⌨️ Enter presionado')
+      if (input.trim() && !isLoading) {
+        console.log('✅ Enviando por Enter')
+        handleSubmit(e as any)
+      } else {
+        console.log('🚫 Enter bloqueado:', { hasInput: !!input.trim(), isLoading })
+      }
+    }
   }
 
   // Función para simular streaming
@@ -60,6 +165,13 @@ function ContentIA() {
       if (index < textoCompleto.length) {
         setRespuestaStreaming(textoCompleto.substring(0, index + 1))
         index++
+        
+        // Scroll automático cada 10 caracteres durante el streaming
+        if (index % 10 === 0) {
+          setTimeout(() => {
+            chatEndRef.current?.scrollIntoView({ behavior: 'smooth' })
+          }, 50)
+        }
       } else {
         clearInterval(interval)
       }
@@ -70,9 +182,13 @@ function ContentIA() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    if (!input.trim()) return
+    if (!input.trim() || isLoading) {
+      console.log('🚫 Envío bloqueado:', { hasInput: !!input.trim(), isLoading })
+      return // Prevenir múltiples envíos
+    }
 
     const preguntaTexto = input.trim()
+    console.log('📝 Iniciando envío de pregunta:', preguntaTexto.substring(0, 50) + '...')
     
     // Agregar pregunta al historial
     const nuevaPregunta = {
@@ -108,7 +224,12 @@ function ContentIA() {
         }
         setConversacion(prev => [...prev, nuevaRespuesta])
         setRespuestaStreaming('')
-      }, respuestaIA.texto.length * 8 + 500) // Tiempo que tarda el streaming + buffer más pequeño
+        
+        // Hacer scroll al final del streaming
+        setTimeout(() => {
+          chatEndRef.current?.scrollIntoView({ behavior: 'smooth' })
+        }, 500)
+      }, respuestaIA.texto.length * 8 + 3000) // Buffer mucho más grande para evitar duplicación
       
     } catch (error) {
       console.error('Error al procesar pregunta:', error)
@@ -159,9 +280,9 @@ function ContentIA() {
             }`} style={{
               backgroundColor: mensaje.tipo === 'pregunta' ? 'rgb(52, 152, 219)' : undefined
             }}>
-              <p className="leading-relaxed">
+              <div className="leading-relaxed">
                 {mensaje.tipo === 'respuesta' ? formatTextWithLinks(mensaje.texto) : mensaje.texto}
-              </p>
+              </div>
             </div>
           </div>
         ))}
@@ -170,10 +291,23 @@ function ContentIA() {
         {respuestaStreaming && (
           <div className="max-w-4xl mx-auto mb-4 flex justify-start">
             <div className="max-w-[80%] bg-gray-100 text-gray-800 p-4 rounded-2xl mr-4">
-              <p className="leading-relaxed">
+              <div className="leading-relaxed">
                 {formatTextWithLinks(respuestaStreaming)}
-                {isLoading && <span className="animate-pulse">|</span>}
-              </p>
+                <span className="animate-pulse ml-1">|</span>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Indicador de "pensando" cuando está procesando pero aún no hay respuesta */}
+        {isLoading && !respuestaStreaming && (
+          <div className="max-w-4xl mx-auto mb-4 flex justify-start">
+            <div className="max-w-[80%] bg-gray-100 text-gray-600 p-4 rounded-2xl mr-4 flex items-center">
+              <svg className="animate-spin h-4 w-4 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+              </svg>
+              <span className="text-sm">Pensando...</span>
             </div>
           </div>
         )}
@@ -191,40 +325,48 @@ function ContentIA() {
               placeholder="¿Qué equipo necesitas? Parrillas, hornos, kamados..."
               value={input}
               onChange={handleInputChange}
+              onKeyPress={handleKeyPress}
               className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent font-poppins"
             />
-            <button 
-              type="submit"
-              disabled={!input.trim() || isLoading}
-              className={`px-6 py-3 font-semibold rounded-lg transition-colors duration-200 font-poppins ${
-                input.trim() && !isLoading 
-                  ? 'text-white' 
-                  : 'text-gray-400 bg-gray-200 cursor-not-allowed'
-              }`}
-              style={{
-                backgroundColor: input.trim() && !isLoading ? 'rgb(52, 152, 219)' : undefined
-              }}
-              onMouseEnter={(e) => {
-                if (input.trim() && !isLoading) {
-                  e.currentTarget.style.backgroundColor = 'rgb(41, 128, 185)'
-                }
-              }}
-              onMouseLeave={(e) => {
-                if (input.trim() && !isLoading) {
-                  e.currentTarget.style.backgroundColor = 'rgb(52, 152, 219)'
-                }
-              }}
-            >
-              {isLoading ? (
-                <div className="flex items-center justify-center">
-                  <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                  </svg>
-                  Enviando...
-                </div>
-              ) : 'Enviar'}
-            </button>
+                   <button
+                     type="submit"
+                     disabled={!input.trim() || isLoading}
+                     className={`px-4 py-3 font-semibold rounded-lg transition-all duration-200 font-poppins flex items-center justify-center ${
+                       input.trim() && !isLoading
+                         ? 'text-white bg-blue-500 hover:bg-blue-600'
+                         : 'text-gray-400 bg-gray-200 cursor-not-allowed'
+                     }`}
+                     style={{
+                       backgroundColor: input.trim() && !isLoading ? 'rgb(52, 152, 219)' : undefined
+                     }}
+                     onMouseEnter={(e) => {
+                       if (input.trim() && !isLoading) {
+                         e.currentTarget.style.backgroundColor = 'rgb(41, 128, 185)'
+                       }
+                     }}
+                     onMouseLeave={(e) => {
+                       if (input.trim() && !isLoading) {
+                         e.currentTarget.style.backgroundColor = 'rgb(52, 152, 219)'
+                       }
+                     }}
+                   >
+                     {isLoading ? (
+                       <>
+                         <svg className="animate-spin h-5 w-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                           <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                           <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                         </svg>
+                         <span className="hidden sm:inline">Procesando...</span>
+                       </>
+                     ) : (
+                       <>
+                         <svg className="h-5 w-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                         </svg>
+                         <span className="hidden sm:inline">Enviar</span>
+                       </>
+                     )}
+                   </button>
           </form>
         </div>
       </div>
