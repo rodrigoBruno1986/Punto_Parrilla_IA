@@ -18,6 +18,7 @@ const openrouterApi = axios.create({
 export const enviarPreguntaIA = async (pregunta: PreguntaIA): Promise<RespuestaIA> => {
     try {
         console.log('Enviando pregunta a OpenRouter:', pregunta.texto)
+        console.log('API Key presente:', !!import.meta.env.VITE_OPENROUTER_API_KEY)
 
         const response = await openrouterApi.post('/chat/completions', {
             model: 'openai/gpt-4o',
