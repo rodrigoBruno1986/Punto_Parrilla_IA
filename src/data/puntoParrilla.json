@@ -1,0 +1,955 @@
+{
+    "empresa": {
+        "nombre": "Punto Parrilla",
+        "descripcion": "Distribuidor Oficial Tromen - Hornos, Parrillas, Salamandras, Kamados y Accesorios",
+        "slogan": "Pagá tu compra en 3 CUOTAS SIN INTERÉS"
+    },
+    "contacto": {
+        "telefono": "011 7530-4444",
+        "celular": "11 7112-7482",
+        "sucursales": [
+            {
+                "nombre": "Belgrano",
+                "direccion": "Av. Dr. Ricardo Balbín 2772 - Belgrano",
+                "horarios": "Lunes a Viernes de 10 a 19hs - Sábados de 10 a 16hs"
+            },
+            {
+                "nombre": "Palermo",
+                "direccion": "Av. Córdoba 4276 - Palermo",
+                "horarios": "Lunes a viernes de 10 a 19hs - Sábados 10 a 16hs"
+            }
+        ]
+    },
+    "servicios": [
+        "3 cuotas sin interés",
+        "Frentes de parrilla personalizados",
+        "Asesoramiento técnico",
+        "Envíos a todo el país"
+    ],
+    "categorias": [
+        {
+            "nombre": "Parrillas",
+            "subcategorias": [
+                "Parrillas Carbón/Leña",
+                "Parrillas a Gas",
+                "Parrillas Eléctricas",
+                "Parrillas plegables",
+                "Parrillas Premoldeadas"
+            ]
+        },
+        {
+            "nombre": "Hornos",
+            "subcategorias": [
+                "Hornos a Leña",
+                "Hornos a Gas",
+                "Hornos Eléctricos"
+            ]
+        },
+        {
+            "nombre": "Kamados",
+            "subcategorias": [
+                "Kamados",
+                "Robatayakis",
+                "Accesorios para Kamados"
+            ]
+        },
+        {
+            "nombre": "Calefacción",
+            "subcategorias": [
+                "Salamandras",
+                "Estufas",
+                "Fogones",
+                "Calefactores a leña",
+                "Calefactores a gas",
+                "Calefactores a pellets"
+            ]
+        },
+        {
+            "nombre": "Cocinas",
+            "subcategorias": [
+                "Línea hogar",
+                "Semi/industriales",
+                "Anafes"
+            ]
+        },
+        {
+            "nombre": "Campanas",
+            "subcategorias": [
+                "De pared",
+                "De Isla",
+                "Extractores"
+            ]
+        },
+        {
+            "nombre": "Accesorios",
+            "subcategorias": [
+                "Braseros de mesa",
+                "Discos/Planchas",
+                "Ollas/Sartenes/Provoleteras",
+                "Utensillos",
+                "Tablas y Platos",
+                "Guantes",
+                "Iniciadores de fuego"
+            ]
+        }
+    ],
+    "marcas": [
+        "Tromen",
+        "Invernativa",
+        "Broil King",
+        "BBQ Grill",
+        "Bosca",
+        "Humos",
+        "Gadnic"
+    ],
+    "productos_completos": [
+        {
+            "categoria": "Parrillas Carbón",
+            "productos": [
+                {
+                    "nombre": "Duomo Oval Tromen",
+                    "marca": "Tromen",
+                    "precio": 398720,
+                    "descripcion": "Parrilla ovalada de alta calidad con excelente distribución de calor",
+                    "calificacion": 4.5,
+                    "caracteristicas": [
+                        "Ovalada",
+                        "Acero inoxidable",
+                        "Para leña y carbón"
+                    ],
+                    "capacidad": "Hasta 8 personas"
+                },
+                {
+                    "nombre": "Chulengo Tromen",
+                    "marca": "Tromen",
+                    "precio": 496395,
+                    "descripcion": "Parrilla a leña tradicional argentina, perfecta para asados",
+                    "calificacion": 4.75,
+                    "caracteristicas": [
+                        "Tradicional",
+                        "Acero",
+                        "Regulador de altura"
+                    ],
+                    "capacidad": "Hasta 12 personas",
+                    "informacion_tecnica": {
+                        "material": "Acero inoxidable de 3mm",
+                        "dimensiones": "120cm largo x 60cm ancho x 80cm alto",
+                        "peso": "85kg",
+                        "combustible": "Leña y carbón",
+                        "sistema_altura": "Regulador manual con ruedas",
+                        "cajon_cenizas": "Extraíble para fácil limpieza",
+                        "parrilla": "Acero inoxidable con varillas separadas",
+                        "grosor_parrilla": "8mm",
+                        "patas": "4 patas regulables en altura"
+                    },
+                    "guia_eleccion": {
+                        "para_que_es": "Ideal para asados tradicionales y eventos familiares",
+                        "ventajas": [
+                            "Tradición argentina auténtica",
+                            "Regulador de altura para control de cocción",
+                            "Fácil limpieza con cajón de cenizas",
+                            "Material resistente y duradero",
+                            "Perfecto para asados grandes"
+                        ],
+                        "instalacion": {
+                            "requisitos": "Espacio mínimo 2m x 1m, piso nivelado",
+                            "altura_recomendada": "80cm del suelo",
+                            "ventilacion": "Requiere buena ventilación para humos"
+                        },
+                        "mantenimiento": [
+                            "Limpiar cajón de cenizas después de cada uso",
+                            "Lavar parrilla cuando esté fría",
+                            "Verificar regulador de altura mensualmente",
+                            "Aplicar aceite en parrilla para prevenir oxidación"
+                        ],
+                        "consejos_uso": [
+                            "Calentar la parrilla 30 minutos antes de cocinar",
+                            "Usar leña seca para mejor combustión",
+                            "Regular altura según tipo de carne",
+                            "Mantener fuego constante durante la cocción"
+                        ]
+                    }
+                },
+                {
+                    "nombre": "Parrilla Tas Eme Ponderosa Premier",
+                    "marca": "Tas Eme",
+                    "precio": 769890,
+                    "descripcion": "Parrilla premium con sistema de cocción avanzado",
+                    "caracteristicas": [
+                        "Premium",
+                        "Doble parrilla",
+                        "Cajón de cenizas"
+                    ],
+                    "capacidad": "Hasta 15 personas"
+                }
+            ]
+        },
+        {
+            "categoria": "Parrillas a Gas",
+            "productos": [
+                {
+                    "nombre": "Parrilla a Gas Broil King",
+                    "marca": "Broil King",
+                    "precio": 850000,
+                    "descripcion": "Parrilla a gas de alta gama con múltiples quemadores",
+                    "caracteristicas": [
+                        "4 quemadores",
+                        "Encendido eléctrico",
+                        "Termómetro integrado"
+                    ],
+                    "capacidad": "Hasta 10 personas"
+                }
+            ]
+        },
+        {
+            "categoria": "Parrillas Eléctricas",
+            "productos": [
+                {
+                    "nombre": "Parrilla Eléctrica BBQ Grill",
+                    "marca": "BBQ Grill",
+                    "precio": 320000,
+                    "descripcion": "Parrilla eléctrica para uso en interiores y exteriores",
+                    "caracteristicas": [
+                        "Eléctrica",
+                        "Sin humo",
+                        "Fácil limpieza"
+                    ],
+                    "capacidad": "Hasta 6 personas"
+                }
+            ]
+        },
+        {
+            "categoria": "Parrillas Plegables",
+            "productos": [
+                {
+                    "nombre": "Parrilla Portátil 60 Tromen",
+                    "marca": "Tromen",
+                    "precio": 54503,
+                    "descripcion": "Parrilla portátil sin enlozar, ideal para camping",
+                    "caracteristicas": [
+                        "Plegable",
+                        "Portátil",
+                        "60cm"
+                    ],
+                    "capacidad": "Hasta 4 personas"
+                },
+                {
+                    "nombre": "Parrilla Portátil Ñuke Camper",
+                    "marca": "Ñuke",
+                    "precio": 54503,
+                    "descripcion": "Parrilla portátil ideal para camping y viajes",
+                    "caracteristicas": [
+                        "Camper",
+                        "Compacta",
+                        "Fácil transporte"
+                    ],
+                    "capacidad": "Hasta 4 personas"
+                }
+            ]
+        },
+        {
+            "categoria": "Hornos a Leña",
+            "productos": [
+                {
+                    "nombre": "Horno Tromen TRH a Leña",
+                    "marca": "Tromen",
+                    "precio": 1197650,
+                    "descripcion": "Horno a leña para mesada o embutir, versátil y eficiente",
+                    "caracteristicas": [
+                        "Mesada/Embutir",
+                        "Acero inoxidable",
+                        "Termómetro"
+                    ],
+                    "capacidad": "Pizzas grandes",
+                    "informacion_tecnica": {
+                        "material": "Acero inoxidable 304 de 3mm",
+                        "dimensiones": "60cm diámetro x 45cm alto",
+                        "peso": "95kg",
+                        "combustible": "Leña",
+                        "temperatura_max": "450°C",
+                        "tiempo_calentamiento": "45-60 minutos",
+                        "capacidad_pizza": "Pizzas de 35cm diámetro",
+                        "termometro": "Termómetro analógico integrado",
+                        "puerta": "Puerta de acero con bisagras reforzadas",
+                        "cámara_coccion": "Cámara de cocción en acero inoxidable"
+                    },
+                    "guia_eleccion": {
+                        "para_que_es": "Perfecto para pizzerías, restaurantes y uso doméstico intensivo",
+                        "ventajas": [
+                            "Versátil: mesada o embutido en pared",
+                            "Alta temperatura para pizzas napolitanas",
+                            "Material resistente y duradero",
+                            "Fácil limpieza y mantenimiento",
+                            "Termómetro integrado para control"
+                        ],
+                        "instalacion": {
+                            "opciones": [
+                                "Mesada: sobre base resistente",
+                                "Embutido: en estructura de ladrillos"
+                            ],
+                            "requisitos": "Base sólida, salida de humos al exterior",
+                            "distancia_seguridad": "30cm de materiales combustibles",
+                            "ventilacion": "Salida de humos obligatoria"
+                        },
+                        "mantenimiento": [
+                            "Limpiar cámara de cocción semanalmente",
+                            "Revisar termómetro mensualmente",
+                            "Limpiar salida de humos trimestralmente",
+                            "Verificar bisagras de puerta cada 6 meses"
+                        ],
+                        "consejos_uso": [
+                            "Precalentar 45-60 minutos antes de usar",
+                            "Usar leña seca de buena calidad",
+                            "Mantener fuego constante durante la cocción",
+                            "Para pizzas: temperatura 350-400°C",
+                            "Para pan: temperatura 250-300°C"
+                        ]
+                    }
+                },
+                {
+                    "nombre": "Horno a leña tipo Napolitano Fetén",
+                    "marca": "Fetén",
+                    "precio": 6800000,
+                    "descripcion": "Horno napolitano profesional para pizzerías",
+                    "caracteristicas": [
+                        "Napolitano",
+                        "Profesional",
+                        "Piedra refractaria"
+                    ],
+                    "capacidad": "Pizzas profesionales"
+                },
+                {
+                    "nombre": "Horno Leña Bosca Nahuén",
+                    "marca": "Bosca",
+                    "precio": 1566000,
+                    "descripcion": "Horno de leña de alta gama para cocción profesional",
+                    "caracteristicas": [
+                        "Alta gama",
+                        "Profesional",
+                        "Doble cámara"
+                    ],
+                    "capacidad": "Grande"
+                }
+            ]
+        },
+        {
+            "categoria": "Hornos a Gas",
+            "productos": [
+                {
+                    "nombre": "Horno a Gas Gadnic",
+                    "marca": "Gadnic",
+                    "precio": 450000,
+                    "descripcion": "Horno a gas eficiente para uso doméstico",
+                    "caracteristicas": [
+                        "A gas",
+                        "Eficiente",
+                        "Fácil uso"
+                    ],
+                    "capacidad": "Mediano"
+                }
+            ]
+        },
+        {
+            "categoria": "Hornos Eléctricos",
+            "productos": [
+                {
+                    "nombre": "Horno Eléctrico Humos",
+                    "marca": "Humos",
+                    "precio": 380000,
+                    "descripcion": "Horno eléctrico moderno con control digital",
+                    "caracteristicas": [
+                        "Eléctrico",
+                        "Digital",
+                        "Programable"
+                    ],
+                    "capacidad": "Mediano"
+                }
+            ]
+        },
+        {
+            "categoria": "Fogones",
+            "productos": [
+                {
+                    "nombre": "Fogón Uruguayo Chico Invernativa",
+                    "marca": "Invernativa",
+                    "precio": 62642,
+                    "descripcion": "Fogón compacto ideal para espacios pequeños",
+                    "caracteristicas": [
+                        "Compacto",
+                        "Uruguayo",
+                        "Acero"
+                    ],
+                    "capacidad": "Hasta 4 personas"
+                }
+            ]
+        },
+        {
+            "categoria": "Calefactores",
+            "productos": [
+                {
+                    "nombre": "Salamandra insertable Ñuke",
+                    "marca": "Ñuke",
+                    "precio": 320000,
+                    "descripcion": "Salamandra insertable para calefacción eficiente",
+                    "caracteristicas": [
+                        "Insertable",
+                        "Eficiente",
+                        "Moderno"
+                    ],
+                    "capacidad": "Ambientes medianos"
+                },
+                {
+                    "nombre": "Calefactor a gas encendido",
+                    "precio": 280000,
+                    "descripcion": "Calefactor a gas con encendido automático",
+                    "caracteristicas": [
+                        "A gas",
+                        "Encendido automático",
+                        "Seguro"
+                    ],
+                    "capacidad": "Ambientes medianos"
+                }
+            ]
+        },
+        {
+            "categoria": "Kamados",
+            "productos": [
+                {
+                    "nombre": "Kamado Premium Tromen",
+                    "marca": "Tromen",
+                    "precio": 650000,
+                    "descripcion": "Kamado de cerámica premium para cocción lenta y ahumado profesional",
+                    "caracteristicas": [
+                        "Cerámica",
+                        "Premium",
+                        "Cocción lenta",
+                        "Ahumado"
+                    ],
+                    "capacidad": "Hasta 8 personas",
+                    "dimensiones": "60cm diámetro",
+                    "peso": "120kg",
+                    "combustible": "Carbón vegetal",
+                    "temperatura_max": "350°C",
+                    "tiempo_coccion": "2-8 horas",
+                    "ideal_para": [
+                        "Costillas",
+                        "Brisket",
+                        "Pollo ahumado",
+                        "Pizzas"
+                    ],
+                    "informacion_tecnica": {
+                        "material": "Cerámica refractaria premium de alta densidad",
+                        "dimensiones_completas": "60cm diámetro x 80cm alto",
+                        "peso": "120kg",
+                        "combustible": "Carbón vegetal de alta calidad",
+                        "temperatura_max": "350°C",
+                        "temperatura_ahumado": "110-130°C",
+                        "tiempo_encendido": "20-25 minutos",
+                        "consumo_carbon": "3-4kg por sesión de 6 horas",
+                        "ventilaciones": "3 ventilaciones ajustables (inferior y 2 superiores)",
+                        "parrilla": "Parrilla de acero inoxidable de 8mm",
+                        "deflector": "Deflector de cerámica incluido",
+                        "termometro": "Termómetro digital de precisión",
+                        "accesorios": [
+                            "Parrilla premium",
+                            "Deflector cerámico",
+                            "Termómetro digital",
+                            "Herramientas premium",
+                            "Fundas protectoras"
+                        ]
+                    },
+                    "guia_eleccion": {
+                        "para_que_es": "Ideal para entusiastas del ahumado y cocción lenta profesional",
+                        "ventajas": [
+                            "Temperatura ultra estable por 8+ horas",
+                            "Cocción lenta perfecta para brisket y costillas",
+                            "Material cerámico de alta densidad",
+                            "Control de temperatura preciso",
+                            "Ideal para competencias de BBQ",
+                            "Accesorios premium incluidos"
+                        ],
+                        "instalacion": {
+                            "requisitos": "Base sólida de concreto o mesa resistente, espacio 1.2m x 1.2m",
+                            "altura_recomendada": "Mesa a 90-100cm del suelo",
+                            "ventilacion": "Requiere excelente ventilación para humos",
+                            "distancia_seguridad": "60cm de materiales combustibles"
+                        },
+                        "mantenimiento": [
+                            "Limpiar cenizas después de cada uso",
+                            "Limpiar parrilla cuando esté fría",
+                            "Revisar ventilaciones semanalmente",
+                            "Limpiar deflector mensualmente",
+                            "Calibrar termómetro trimestralmente"
+                        ],
+                        "consejos_uso": [
+                            "Encender carbón en el centro con iniciador",
+                            "Controlar temperatura con ventilaciones superiores",
+                            "Para ahumado: 110-130°C durante 6-8 horas",
+                            "Para parrilla directa: 250-300°C",
+                            "Usar deflector para cocción indirecta",
+                            "Precalentar 20-25 minutos antes de cocinar"
+                        ],
+                        "formas_pago": [
+                            "Efectivo con 10% de descuento (queda en $585.000)",
+                            "Transferencia bancaria con 5% de descuento (queda en $617.500)",
+                            "3 cuotas sin interés con tarjeta ($216.667 cada una)",
+                            "6 cuotas sin interés con tarjeta de crédito ($108.333 cada una)",
+                            "12 cuotas con interés (consultar tasas)"
+                        ],
+                        "garantia": "2 años de garantía por defectos de fabricación",
+                        "entrega": "Envío a todo el país, consultar costo según ubicación",
+                        "url_producto": "https://puntoparrilla.com/kamados/kamado-premium-tromen"
+                    }
+                },
+                {
+                    "nombre": "Kamado Pampero Tromen",
+                    "marca": "Tromen",
+                    "precio": 480000,
+                    "descripcion": "Kamado mediano ideal para familias y cocción versátil",
+                    "caracteristicas": [
+                        "Cerámica",
+                        "Mediano",
+                        "Versátil",
+                        "Control de temperatura"
+                    ],
+                    "capacidad": "Hasta 6 personas",
+                    "dimensiones": "50cm diámetro",
+                    "peso": "85kg",
+                    "combustible": "Carbón vegetal",
+                    "temperatura_max": "300°C",
+                    "tiempo_coccion": "1-6 horas",
+                    "ideal_para": [
+                        "Parrilladas",
+                        "Ahumado",
+                        "Asado directo",
+                        "Pizzas"
+                    ],
+                    "informacion_tecnica": {
+                        "material": "Cerámica refractaria de alta calidad",
+                        "dimensiones_completas": "50cm diámetro x 70cm alto",
+                        "peso": "85kg",
+                        "combustible": "Carbón vegetal de alta calidad",
+                        "temperatura_max": "300°C",
+                        "temperatura_ahumado": "120-140°C",
+                        "tiempo_encendido": "15-20 minutos",
+                        "consumo_carbon": "2-3kg por sesión de 4 horas",
+                        "ventilaciones": "2 ventilaciones ajustables",
+                        "parrilla": "Parrilla de acero inoxidable extraíble",
+                        "deflector": "Deflector de calor incluido",
+                        "termometro": "Termómetro analógico integrado",
+                        "accesorios": [
+                            "Parrilla de acero",
+                            "Deflector",
+                            "Termómetro",
+                            "Herramientas básicas"
+                        ]
+                    },
+                    "guia_eleccion": {
+                        "para_que_es": "Perfecto para familias de 4-6 personas que buscan versatilidad",
+                        "ventajas": [
+                            "Mantiene temperatura estable por horas",
+                            "Cocción lenta perfecta para ahumado",
+                            "Versátil: parrilla directa e indirecta",
+                            "Ahorra combustible comparado con parrillas tradicionales",
+                            "Fácil control de temperatura",
+                            "Material cerámico resistente al calor"
+                        ],
+                        "instalacion": {
+                            "requisitos": "Base sólida y nivelada, espacio 1m x 1m",
+                            "altura_recomendada": "Mesa o base a 80-90cm del suelo",
+                            "ventilacion": "Requiere buena ventilación para humos",
+                            "distancia_seguridad": "50cm de materiales combustibles"
+                        },
+                        "mantenimiento": [
+                            "Limpiar cenizas después de cada uso",
+                            "Limpiar parrilla cuando esté fría",
+                            "Revisar ventilaciones mensualmente",
+                            "Limpiar deflector trimestralmente",
+                            "Verificar termómetro cada 6 meses"
+                        ],
+                        "consejos_uso": [
+                            "Encender carbón en el centro del kamado",
+                            "Controlar temperatura con ventilaciones superiores",
+                            "Para ahumado: temperatura baja (120-140°C)",
+                            "Para parrilla directa: temperatura alta (200-250°C)",
+                            "Usar deflector para cocción indirecta",
+                            "Precalentar 15-20 minutos antes de cocinar"
+                        ],
+                        "formas_pago": [
+                            "Efectivo con 10% de descuento",
+                            "Transferencia bancaria con 5% de descuento",
+                            "3 cuotas sin interés con tarjeta",
+                            "6 cuotas sin interés con tarjeta de crédito",
+                            "12 cuotas con interés (consultar tasas)"
+                        ],
+                        "garantia": "2 años de garantía por defectos de fabricación",
+                        "entrega": "Envío a todo el país, consultar costo según ubicación",
+                        "url_producto": "https://puntoparrilla.com/kamados/kamado-pampero-tromen"
+                    }
+                },
+                {
+                    "nombre": "Robatayaki Premium",
+                    "marca": "Tromen",
+                    "precio": 720000,
+                    "descripcion": "Robatayaki profesional para cocción japonesa y eventos",
+                    "caracteristicas": [
+                        "Japonés",
+                        "Profesional",
+                        "Mesa",
+                        "Parrilla superior"
+                    ],
+                    "capacidad": "Hasta 10 personas",
+                    "dimensiones": "80cm x 60cm",
+                    "peso": "150kg",
+                    "combustible": "Carbón vegetal",
+                    "temperatura_max": "400°C",
+                    "tiempo_coccion": "Directo (15-30 min)",
+                    "ideal_para": [
+                        "Yakitori",
+                        "Teppanyaki",
+                        "Cocción directa",
+                        "Eventos"
+                    ],
+                    "informacion_tecnica": {
+                        "material": "Acero inoxidable 316L de 4mm",
+                        "dimensiones_completas": "80cm largo x 60cm ancho x 90cm alto",
+                        "peso": "150kg",
+                        "combustible": "Carbón vegetal de alta calidad",
+                        "temperatura_max": "400°C",
+                        "tiempo_encendido": "10-15 minutos",
+                        "consumo_carbon": "2-3kg por sesión de 2 horas",
+                        "parrilla_principal": "Parrilla de acero inoxidable de 6mm",
+                        "parrilla_superior": "Parrilla de teppanyaki de acero inoxidable",
+                        "mesa": "Mesa de trabajo integrada de acero inoxidable",
+                        "ventilaciones": "Ventilación natural optimizada",
+                        "accesorios": [
+                            "Parrilla principal",
+                            "Parrilla teppanyaki",
+                            "Mesa de trabajo",
+                            "Herramientas japonesas",
+                            "Pinchos para yakitori"
+                        ]
+                    },
+                    "guia_eleccion": {
+                        "para_que_es": "Ideal para restaurantes japoneses, eventos y cocción profesional",
+                        "ventajas": [
+                            "Cocción japonesa auténtica",
+                            "Doble parrilla: principal y teppanyaki",
+                            "Mesa de trabajo integrada",
+                            "Temperatura muy alta para sellado perfecto",
+                            "Ideal para eventos y demostraciones",
+                            "Material premium resistente"
+                        ],
+                        "instalacion": {
+                            "requisitos": "Base sólida de concreto, espacio 1.5m x 1.5m",
+                            "altura_recomendada": "Mesa a 100-110cm del suelo",
+                            "ventilacion": "Requiere excelente ventilación para humos",
+                            "distancia_seguridad": "80cm de materiales combustibles"
+                        },
+                        "mantenimiento": [
+                            "Limpiar cenizas después de cada uso",
+                            "Limpiar parrillas cuando estén frías",
+                            "Limpiar mesa de trabajo diariamente",
+                            "Revisar ventilaciones semanalmente",
+                            "Lubricar bisagras mensualmente"
+                        ],
+                        "consejos_uso": [
+                            "Encender carbón en el centro del robatayaki",
+                            "Usar parrilla principal para yakitori y carnes",
+                            "Usar parrilla teppanyaki para verduras y mariscos",
+                            "Mantener temperatura alta (300-400°C)",
+                            "Cocinar en lotes pequeños para mejor control",
+                            "Usar herramientas japonesas específicas"
+                        ],
+                        "formas_pago": [
+                            "Efectivo con 10% de descuento (queda en $648.000)",
+                            "Transferencia bancaria con 5% de descuento (queda en $684.000)",
+                            "3 cuotas sin interés con tarjeta ($240.000 cada una)",
+                            "6 cuotas sin interés con tarjeta de crédito ($120.000 cada una)",
+                            "12 cuotas con interés (consultar tasas)"
+                        ],
+                        "garantia": "2 años de garantía por defectos de fabricación",
+                        "entrega": "Envío a todo el país, consultar costo según ubicación",
+                        "url_producto": "https://puntoparrilla.com/kamados/robatayaki-premium-tromen"
+                    }
+                }
+            ]
+        },
+        {
+            "categoria": "Cocinas",
+            "productos": [
+                {
+                    "nombre": "Cocina Llanos Eco Acero",
+                    "marca": "Llanos",
+                    "precio": 420000,
+                    "descripcion": "Cocina ecológica de acero inoxidable",
+                    "caracteristicas": [
+                        "Ecológica",
+                        "Acero inoxidable",
+                        "4 hornallas"
+                    ],
+                    "capacidad": "Uso doméstico"
+                },
+                {
+                    "nombre": "Anafe eléctrico TST Vitrocerámico",
+                    "marca": "TST",
+                    "precio": 180000,
+                    "descripcion": "Anafe eléctrico vitrocerámico de 4 hornallas",
+                    "caracteristicas": [
+                        "Vitrocerámico",
+                        "4 hornallas",
+                        "Digital"
+                    ],
+                    "capacidad": "Uso doméstico"
+                }
+            ]
+        },
+        {
+            "categoria": "Campanas",
+            "productos": [
+                {
+                    "nombre": "Campana Espejo B1",
+                    "precio": 280000,
+                    "descripcion": "Campana de pared con diseño espejo, ideal para cocinas modernas",
+                    "caracteristicas": [
+                        "De pared",
+                        "Espejo",
+                        "60cm",
+                        "Extractora"
+                    ],
+                    "capacidad": "Cocinas medianas",
+                    "informacion_tecnica": {
+                        "tipo_instalacion": "De pared",
+                        "ancho": "60cm",
+                        "capacidad_extraccion": "600 m³/h",
+                        "nivel_ruido": "55 dB",
+                        "filtros": "Filtros metálicos lavables",
+                        "modos": [
+                            "Extracción al exterior",
+                            "Filtrado con carbón activo"
+                        ],
+                        "eficiencia_energetica": "A+",
+                        "material": "Acero inoxidable con acabado espejo"
+                    },
+                    "guia_eleccion": {
+                        "para_que_es": "Ideal para cocinas con zona de cocción de 60cm o menos",
+                        "ventajas": [
+                            "Diseño elegante con acabado espejo",
+                            "Fácil limpieza y mantenimiento",
+                            "Funcionamiento silencioso",
+                            "Instalación simple en pared"
+                        ],
+                        "instalacion": {
+                            "requisitos": "Pared resistente, salida al exterior o filtrado",
+                            "altura_recomendada": "65-75cm sobre la cocina",
+                            "ancho_cobertura": "Debe cubrir toda la zona de cocción"
+                        },
+                        "mantenimiento": [
+                            "Limpiar filtros metálicos cada 2-3 meses",
+                            "Si usa filtros de carbón, reemplazar cada 6 meses",
+                            "Limpiar superficie con productos específicos para acero inoxidable"
+                        ]
+                    }
+                },
+                {
+                    "nombre": "Campana Colhue B1",
+                    "precio": 320000,
+                    "descripcion": "Campana de isla moderna para cocinas con isla central",
+                    "caracteristicas": [
+                        "De isla",
+                        "Moderno",
+                        "75cm",
+                        "Extractora"
+                    ],
+                    "capacidad": "Cocinas grandes",
+                    "informacion_tecnica": {
+                        "tipo_instalacion": "De isla/techo",
+                        "ancho": "75cm",
+                        "capacidad_extraccion": "750 m³/h",
+                        "nivel_ruido": "58 dB",
+                        "filtros": "Filtros metálicos lavables",
+                        "modos": [
+                            "Extracción al exterior",
+                            "Filtrado con carbón activo"
+                        ],
+                        "eficiencia_energetica": "A+",
+                        "material": "Acero inoxidable con diseño moderno"
+                    },
+                    "guia_eleccion": {
+                        "para_que_es": "Perfecta para cocinas con isla central de 75cm",
+                        "ventajas": [
+                            "Diseño moderno y minimalista",
+                            "Alta capacidad de extracción",
+                            "Ideal para cocinas abiertas",
+                            "Instalación en techo o isla"
+                        ],
+                        "instalacion": {
+                            "requisitos": "Techo resistente o estructura de isla, salida al exterior",
+                            "altura_recomendada": "70-80cm sobre la cocina",
+                            "cobertura": "Debe sobresalir 10cm por cada lado de la zona de cocción"
+                        },
+                        "mantenimiento": [
+                            "Limpiar filtros metálicos mensualmente",
+                            "Revisar conexiones de extracción trimestralmente",
+                            "Limpiar exterior con productos no abrasivos"
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "categoria": "Accesorios",
+            "productos": [
+                {
+                    "nombre": "Brasero de Mesa Tromen",
+                    "marca": "Tromen",
+                    "precio": 45000,
+                    "descripcion": "Brasero portátil para mesa",
+                    "caracteristicas": [
+                        "Portátil",
+                        "Mesa",
+                        "Acero"
+                    ]
+                },
+                {
+                    "nombre": "Disco/Plancha Tromen",
+                    "marca": "Tromen",
+                    "precio": 38000,
+                    "descripcion": "Disco de acero para cocción directa",
+                    "caracteristicas": [
+                        "Acero",
+                        "Cocción directa",
+                        "Lavable"
+                    ]
+                },
+                {
+                    "nombre": "Guantes para Parrilla",
+                    "precio": 25000,
+                    "descripcion": "Guantes resistentes al calor para parrilla",
+                    "caracteristicas": [
+                        "Resistente al calor",
+                        "Ergonómicos",
+                        "Lavables"
+                    ]
+                },
+                {
+                    "nombre": "Palas y Atizadores Set",
+                    "precio": 35000,
+                    "descripcion": "Set completo de herramientas para parrilla",
+                    "caracteristicas": [
+                        "Set completo",
+                        "Acero inoxidable",
+                        "Ergonómicos"
+                    ]
+                }
+            ]
+        }
+    ],
+    "promociones": [
+        "3 cuotas sin interés en toda la tienda",
+        "Descuentos en efectivo o transferencia",
+        "Envíos a todo el país"
+    ],
+    "formas_pago": {
+        "efectivo": {
+            "descuento": "10% de descuento",
+            "disponible": "En ambas sucursales",
+            "requisitos": "Pago completo al contado"
+        },
+        "transferencia": {
+            "descuento": "5% de descuento",
+            "disponible": "Transferencia bancaria",
+            "requisitos": "Comprobante de transferencia"
+        },
+        "tarjeta_debito": {
+            "cuotas": "Hasta 3 cuotas sin interés",
+            "disponible": "Todas las tarjetas de débito",
+            "requisitos": "DNI y tarjeta física"
+        },
+        "tarjeta_credito": {
+            "cuotas": "Hasta 6 cuotas sin interés, hasta 12 con interés",
+            "disponible": "Visa, Mastercard, American Express",
+            "requisitos": "DNI, tarjeta y comprobante de ingresos"
+        },
+        "financiacion": {
+            "cuotas": "Hasta 24 cuotas",
+            "disponible": "Productos superiores a $500.000",
+            "requisitos": "Verificación crediticia"
+        }
+    },
+    "politicas_comerciales": {
+        "descuentos": {
+            "efectivo": "10% de descuento sobre precio de lista",
+            "transferencia": "5% de descuento sobre precio de lista",
+            "mayorista": "Descuentos especiales para compras superiores a $1.000.000"
+        },
+        "envios": {
+            "caba": "Gratis en compras superiores a $100.000",
+            "gba": "Gratis en compras superiores a $150.000",
+            "interior": "Costo según ubicación, consultar",
+            "tiempo": "5-10 días hábiles según destino"
+        },
+        "garantias": {
+            "parrillas": "2 años de garantía por defectos de fabricación",
+            "hornos": "3 años de garantía por defectos de fabricación",
+            "kamados": "2 años de garantía por defectos de fabricación",
+            "campanas": "1 año de garantía por defectos de fabricación"
+        },
+        "devoluciones": {
+            "plazo": "30 días para productos sin usar",
+            "condiciones": "Producto en estado original con etiquetas",
+            "gastos": "Los gastos de envío corren por cuenta del cliente"
+        }
+    },
+    "informacion_adicional": {
+        "distribuidor_oficial": "Tromen",
+        "especialidad": "Hornos, Parrillas, Salamandras, Kamados y Accesorios",
+        "experiencia": "Especialistas en equipos de parrilla y cocción",
+        "servicio_tecnico": "Asesoramiento y soporte técnico disponible"
+    },
+    "preguntas_frecuentes": {
+        "capacidades": {
+            "parrillas_pequeñas": "Hasta 4 personas: Parrillas portátiles Tromen y Ñuke",
+            "parrillas_medianas": "4-8 personas: Duomo Oval Tromen, Kamado Pampero",
+            "parrillas_grandes": "8-15 personas: Chulengo Tromen, Tas Eme Premier, Kamado Premium",
+            "parrillas_extra_grandes": "15+ personas: Hornos profesionales, Robatayaki"
+        },
+        "kamados": {
+            "que_es": "Kamado es una parrilla de cerámica japonesa que permite cocción lenta y ahumado",
+            "ventajas": [
+                "Mantiene temperatura estable por horas",
+                "Cocción lenta y ahumado perfecto",
+                "Ahorra combustible",
+                "Versátil: parrilla directa e indirecta"
+            ],
+            "combustible": "Carbón vegetal de alta calidad",
+            "tiempo_encendido": "15-20 minutos para alcanzar temperatura",
+            "mantenimiento": "Limpieza simple, cenizas se desechan fácilmente"
+        },
+        "hornos_pizza": {
+            "napolitano": "Horno Fetén Napolitano - Temperatura 400-500°C, pizzas en 90 segundos",
+            "tradicional": "Horno Tromen TRH - Temperatura 300-400°C, pizzas en 3-5 minutos",
+            "capacidad_pizza": "Pizzas de 30-35cm de diámetro"
+        }
+    },
+    "consejos_uso": {
+        "parrillas_carbon": [
+            "Usar carbón de buena calidad para mejor sabor",
+            "Calentar la parrilla 20-30 minutos antes de cocinar",
+            "Limpiar la parrilla cuando esté caliente",
+            "Controlar la altura de la parrilla según la cocción"
+        ],
+        "kamados": [
+            "Encender el carbón en el centro del kamado",
+            "Controlar la temperatura con las ventilaciones",
+            "Para ahumado: temperatura baja (120-140°C)",
+            "Para parrilla directa: temperatura alta (200-250°C)"
+        ],
+        "hornos_lena": [
+            "Usar leña seca y de buena calidad",
+            "Precalentar el horno 45-60 minutos",
+            "Mantener fuego constante durante la cocción",
+            "Controlar la temperatura con el termómetro"
+        ]
+    }
+}
