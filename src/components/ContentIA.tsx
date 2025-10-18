@@ -37,15 +37,15 @@ function ContentIA() {
 
   // Scroll automático hacia abajo cuando cambia el contenido
   useEffect(() => {
-    // Solo hacer scroll si hay contenido
-    if (conversacion.length > 0 || respuestaStreaming) {
+    // Solo hacer scroll si hay contenido y no está cargando
+    if ((conversacion.length > 0 || respuestaStreaming) && !isLoading) {
       const timer = setTimeout(() => {
         chatEndRef.current?.scrollIntoView({ behavior: 'smooth' })
-      }, 100) // Pequeño delay para evitar parpadeo excesivo
+      }, 300) // Delay más largo para evitar parpadeo
       
       return () => clearTimeout(timer)
     }
-  }, [conversacion, respuestaStreaming])
+  }, [conversacion.length, respuestaStreaming, isLoading])
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInput(e.target.value)
@@ -63,7 +63,7 @@ function ContentIA() {
       } else {
         clearInterval(interval)
       }
-    }, 15) // 15ms entre caracteres para efecto de streaming más rápido
+    }, 8) // 8ms entre caracteres para efecto de streaming más rápido
     
     return interval
   }
@@ -108,7 +108,7 @@ function ContentIA() {
         }
         setConversacion(prev => [...prev, nuevaRespuesta])
         setRespuestaStreaming('')
-      }, respuestaIA.texto.length * 15 + 1000) // Tiempo que tarda el streaming + buffer más grande
+      }, respuestaIA.texto.length * 8 + 500) // Tiempo que tarda el streaming + buffer más pequeño
       
     } catch (error) {
       console.error('Error al procesar pregunta:', error)
@@ -167,7 +167,7 @@ function ContentIA() {
         ))}
 
         {/* Mostrar respuesta con streaming simulado SOLO si está escribiendo */}
-        {respuestaStreaming && !conversacion.some(msg => msg.tipo === 'respuesta' && msg.texto.includes(respuestaStreaming.substring(0, 50))) && (
+        {respuestaStreaming && (
           <div className="max-w-4xl mx-auto mb-4 flex justify-start">
             <div className="max-w-[80%] bg-gray-100 text-gray-800 p-4 rounded-2xl mr-4">
               <p className="leading-relaxed">

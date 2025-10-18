@@ -2,14 +2,14 @@ import axios from 'axios'
 import type { PreguntaIA, RespuestaIA } from '../types/ia'
 import dataPuntoParrilla from '../data/puntoParrilla.json'
 
-// Configuración de axios para usar el proxy de Vite
+// Configuración de axios para petición directa a OpenRouter
 const openrouterApi = axios.create({
-    baseURL: '/api/openrouter', // Usa el proxy de Vite
-    timeout: 30000,
+    baseURL: 'https://openrouter.ai/api/v1', // Petición directa
+    timeout: 15000,
     headers: {
         'Authorization': `Bearer ${import.meta.env.VITE_OPENROUTER_API_KEY}`,
         'Content-Type': 'application/json',
-        'HTTP-Referer': 'https://punto-parrilla-ia.vercel.app',
+        'HTTP-Referer': 'http://localhost:5173',
         'X-Title': 'Punto Parrilla IA'
     }
 })
@@ -19,9 +19,10 @@ export const enviarPreguntaIA = async (pregunta: PreguntaIA): Promise<RespuestaI
     try {
         console.log('Enviando pregunta a OpenRouter:', pregunta.texto)
         console.log('API Key presente:', !!import.meta.env.VITE_OPENROUTER_API_KEY)
+        console.log('URL completa:', 'https://openrouter.ai/api/v1/chat/completions')
 
         const response = await openrouterApi.post('/chat/completions', {
-            model: 'openai/gpt-4o',
+            model: 'nvidia/nemotron-nano-9b-v2:free',
             messages: [
                 {
                     role: 'system',
