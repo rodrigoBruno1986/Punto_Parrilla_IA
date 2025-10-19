@@ -6,10 +6,10 @@ import { enviarPreguntaIA } from '../services/iaService'
 const formatTextWithLinks = (text: string) => {
   // Primero, quitar corchetes alrededor de URLs
   const textWithoutBrackets = text.replace(/\[(https?:\/\/[^\]]+)\]/g, '$1')
-  
+
   // Dividir el texto en líneas para mejor formato
   const lines = textWithoutBrackets.split('\n')
-  
+
   return lines.map((line, lineIndex) => {
     // Detectar tablas (líneas con |)
     if (line.includes('|') && line.trim().length > 0) {
@@ -19,7 +19,7 @@ const formatTextWithLinks = (text: string) => {
         </div>
       )
     }
-    
+
     // Detectar títulos con paréntesis (como "Ingredientes (1 copa)")
     const isTitleWithParentheses = /^[A-Za-z\s]+\(\d+[^)]*\)/.test(line.trim())
     if (isTitleWithParentheses) {
@@ -31,7 +31,7 @@ const formatTextWithLinks = (text: string) => {
         </div>
       )
     }
-    
+
     // Detectar subtítulos (como "Pasos", "Tips de barra")
     const isSubtitle = /^[A-Za-z\s]+$/.test(line.trim()) && line.trim().length > 0 && lineIndex > 0
     if (isSubtitle && !line.includes('|') && !line.includes('•') && !line.includes('-')) {
@@ -43,11 +43,11 @@ const formatTextWithLinks = (text: string) => {
         </div>
       )
     }
-    
+
     // Detectar si la línea es una lista con viñetas
     const isBulletPoint = /^[\s]*[-*•]\s/.test(line)
     const isNumberedList = /^[\s]*\d+\.\s/.test(line)
-    
+
     if (isBulletPoint || isNumberedList) {
       return (
         <div key={lineIndex} className="ml-4 mb-1 flex items-start">
@@ -60,12 +60,12 @@ const formatTextWithLinks = (text: string) => {
         </div>
       )
     }
-    
+
     // Si la línea está vacía, agregar espacio
     if (line.trim() === '') {
       return <div key={lineIndex} className="h-2"></div>
     }
-    
+
     // Línea normal
     return (
       <div key={lineIndex} className="mb-2">
@@ -78,14 +78,14 @@ const formatTextWithLinks = (text: string) => {
 // Función para formatear líneas de tabla
 const formatTableLine = (line: string) => {
   const cells = line.split('|').map(cell => cell.trim()).filter(cell => cell.length > 0)
-  
+
   if (cells.length === 0) return null
-  
+
   // Si es una línea separadora (contiene solo guiones)
   if (cells.every(cell => /^-+$/.test(cell))) {
     return <div className="border-b border-gray-300 my-2"></div>
   }
-  
+
   return (
     <div className="grid grid-cols-2 gap-4 py-2 border-b border-gray-100">
       {cells.map((cell, index) => (
@@ -101,7 +101,7 @@ const formatTableLine = (line: string) => {
 const formatLineWithLinks = (line: string) => {
   const urlRegex = /(https?:\/\/[^\s]+)/g
   const parts = line.split(urlRegex)
-  
+
   return parts.map((part, index) => {
     if (part.match(urlRegex)) {
       return (
@@ -122,22 +122,58 @@ const formatLineWithLinks = (line: string) => {
 
 function ContentIA() {
   const [input, setInput] = useState<string>('')
-  const [conversacion, setConversacion] = useState<Array<{tipo: 'pregunta' | 'respuesta', texto: string, id: string}>>([])
+  const [conversacion, setConversacion] = useState<Array<{ tipo: 'pregunta' | 'respuesta', texto: string, id: string }>>([])
   const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [isWaitingDelay, setIsWaitingDelay] = useState<boolean>(false)
   const [respuestaStreaming, setRespuestaStreaming] = useState<string>('')
+  const [isKeyboardOpen, setIsKeyboardOpen] = useState<boolean>(false)
   const chatEndRef = useRef<HTMLDivElement>(null)
 
   // Scroll automático hacia abajo cuando cambia el contenido
   useEffect(() => {
-    // Hacer scroll cuando hay conversación o cuando está escribiendo
-    if (conversacion.length > 0 || respuestaStreaming) {
+    // Hacer scroll solo cuando se agrega una nueva respuesta completa
+    if (conversacion.length > 0) {
       const timer = setTimeout(() => {
         chatEndRef.current?.scrollIntoView({ behavior: 'smooth' })
-      }, 100) // Reducido para mejor respuesta
+      }, 300) // Delay más largo para evitar titileo
       
       return () => clearTimeout(timer)
     }
-  }, [conversacion.length, respuestaStreaming])
+  }, [conversacion.length]) // Solo cuando cambia la cantidad de mensajes
+
+  // Detectar cuando se abre/cierra el teclado en mobile
+  useEffect(() => {
+    const handleResize = () => {
+      const initialHeight = window.innerHeight
+      const currentHeight = window.visualViewport?.height || window.innerHeight
+      const heightDiff = initialHeight - currentHeight
+      
+      // Si la diferencia es significativa, probablemente se abrió el teclado
+      setIsKeyboardOpen(heightDiff > 150)
+      
+      // Scroll al final cuando se abre el teclado
+      if (heightDiff > 150) {
+        setTimeout(() => {
+          chatEndRef.current?.scrollIntoView({ behavior: 'smooth' })
+        }, 300)
+      }
+    }
+
+    // Usar Visual Viewport API si está disponible (mejor para mobile)
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener('resize', handleResize)
+    } else {
+      window.addEventListener('resize', handleResize)
+    }
+
+    return () => {
+      if (window.visualViewport) {
+        window.visualViewport.removeEventListener('resize', handleResize)
+      } else {
+        window.removeEventListener('resize', handleResize)
+      }
+    }
+  }, [])
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInput(e.target.value)
@@ -160,23 +196,23 @@ function ContentIA() {
   const simularStreaming = (textoCompleto: string) => {
     setRespuestaStreaming('')
     let index = 0
-    
+
     const interval = setInterval(() => {
       if (index < textoCompleto.length) {
         setRespuestaStreaming(textoCompleto.substring(0, index + 1))
         index++
-        
-        // Scroll automático cada 10 caracteres durante el streaming
-        if (index % 10 === 0) {
+
+        // Scroll automático solo al final del streaming
+        if (index === textoCompleto.length - 1) {
           setTimeout(() => {
             chatEndRef.current?.scrollIntoView({ behavior: 'smooth' })
-          }, 50)
+          }, 100)
         }
       } else {
         clearInterval(interval)
       }
     }, 8) // 8ms entre caracteres para efecto de streaming más rápido
-    
+
     return interval
   }
 
@@ -189,18 +225,19 @@ function ContentIA() {
 
     const preguntaTexto = input.trim()
     console.log('📝 Iniciando envío de pregunta:', preguntaTexto.substring(0, 50) + '...')
-    
+
     // Agregar pregunta al historial
     const nuevaPregunta = {
       tipo: 'pregunta' as const,
       texto: preguntaTexto,
       id: `pregunta-${Date.now()}`
     }
-    
+
     setConversacion(prev => [...prev, nuevaPregunta])
     setInput('') // Limpiar el input
     setIsLoading(true)
-    
+    setIsWaitingDelay(true) // Mostrar que está esperando delay
+
     try {
       // Crear pregunta tipada para el servicio
       const preguntaIA: PreguntaIA = {
@@ -208,13 +245,14 @@ function ContentIA() {
         timestamp: new Date(),
         id: nuevaPregunta.id
       }
-      
+
       // Enviar pregunta al servicio de IA
+      setIsWaitingDelay(false) // Ya no está esperando delay
       const respuestaIA = await enviarPreguntaIA(preguntaIA)
-      
+
       // Simular streaming de la respuesta
       simularStreaming(respuestaIA.texto)
-      
+
       // Agregar respuesta al historial cuando termine el streaming
       setTimeout(() => {
         const nuevaRespuesta = {
@@ -224,13 +262,13 @@ function ContentIA() {
         }
         setConversacion(prev => [...prev, nuevaRespuesta])
         setRespuestaStreaming('')
-        
+
         // Hacer scroll al final del streaming
         setTimeout(() => {
           chatEndRef.current?.scrollIntoView({ behavior: 'smooth' })
         }, 500)
       }, respuestaIA.texto.length * 8 + 3000) // Buffer mucho más grande para evitar duplicación
-      
+
     } catch (error) {
       console.error('Error al procesar pregunta:', error)
       // Respuesta de error
@@ -240,20 +278,21 @@ function ContentIA() {
         id: `error-${Date.now()}`
       }
       simularStreaming(respuestaError.texto)
-      
+
       setTimeout(() => {
         setConversacion(prev => [...prev, respuestaError])
         setRespuestaStreaming('')
       }, respuestaError.texto.length * 15 + 1000)
     } finally {
       setIsLoading(false)
+      setIsWaitingDelay(false)
     }
   }
 
   return (
-    <div className="pb-20">
+    <div className={`pb-20 ${isKeyboardOpen ? 'pb-32' : ''}`}>
       {/* Área de chat - sin scroll propio */}
-      <div className="p-4 pt-20 space-y-4">
+      <div className={`p-4 pt-16 lg:pt-20 pb-20 lg:pb-20 space-y-4 ${isKeyboardOpen ? 'pb-24' : ''}`}>
         {/* Mensaje de bienvenida si no hay conversación */}
         {conversacion.length === 0 && !respuestaStreaming && (
           <div className="flex items-center justify-center min-h-[60vh]">
@@ -270,16 +309,14 @@ function ContentIA() {
 
         {/* Mostrar historial completo de la conversación */}
         {conversacion.map((mensaje) => (
-          <div key={mensaje.id} className={`max-w-4xl mx-auto mb-4 ${
-            mensaje.tipo === 'pregunta' ? 'flex justify-end' : 'flex justify-start'
-          }`}>
-            <div className={`max-w-[80%] p-4 rounded-2xl ${
-              mensaje.tipo === 'pregunta' 
-                ? 'text-white ml-4' 
+          <div key={mensaje.id} className={`max-w-4xl mx-auto mb-4 ${mensaje.tipo === 'pregunta' ? 'flex justify-end' : 'flex justify-start'
+            }`}>
+            <div className={`max-w-[80%] p-4 rounded-2xl ${mensaje.tipo === 'pregunta'
+                ? 'text-white ml-4'
                 : 'bg-gray-100 text-gray-800 mr-4'
-            }`} style={{
-              backgroundColor: mensaje.tipo === 'pregunta' ? 'rgb(52, 152, 219)' : undefined
-            }}>
+              }`} style={{
+                backgroundColor: mensaje.tipo === 'pregunta' ? 'rgb(52, 152, 219)' : undefined
+              }}>
               <div className="leading-relaxed">
                 {mensaje.tipo === 'respuesta' ? formatTextWithLinks(mensaje.texto) : mensaje.texto}
               </div>
@@ -311,62 +348,43 @@ function ContentIA() {
             </div>
           </div>
         )}
-        
+
         {/* Elemento invisible para scroll automático */}
         <div ref={chatEndRef} />
       </div>
 
-      {/* Input fijo abajo */}
-      <div className="fixed bottom-0 left-0 right-0 bg-white p-4 z-50">
-        <div className="max-w-4xl mx-auto">
-          <form onSubmit={handleSubmit} className="flex gap-2">
+      {/* Input fijo abajo - optimizado para mobile */}
+      <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-lg z-50">
+        <div className="max-w-4xl mx-auto p-4">
+          <form onSubmit={handleSubmit} className="flex gap-3">
             <input
               type="text"
               placeholder="¿Qué equipo necesitas? Parrillas, hornos, kamados..."
               value={input}
               onChange={handleInputChange}
               onKeyPress={handleKeyPress}
-              className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent font-poppins"
+              className="flex-1 px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 font-poppins text-gray-700 placeholder-gray-500 transition-all duration-200"
             />
-                   <button
-                     type="submit"
-                     disabled={!input.trim() || isLoading}
-                     className={`px-4 py-3 font-semibold rounded-lg transition-all duration-200 font-poppins flex items-center justify-center ${
-                       input.trim() && !isLoading
-                         ? 'text-white bg-blue-500 hover:bg-blue-600'
-                         : 'text-gray-400 bg-gray-200 cursor-not-allowed'
-                     }`}
-                     style={{
-                       backgroundColor: input.trim() && !isLoading ? 'rgb(52, 152, 219)' : undefined
-                     }}
-                     onMouseEnter={(e) => {
-                       if (input.trim() && !isLoading) {
-                         e.currentTarget.style.backgroundColor = 'rgb(41, 128, 185)'
-                       }
-                     }}
-                     onMouseLeave={(e) => {
-                       if (input.trim() && !isLoading) {
-                         e.currentTarget.style.backgroundColor = 'rgb(52, 152, 219)'
-                       }
-                     }}
-                   >
-                     {isLoading ? (
-                       <>
-                         <svg className="animate-spin h-5 w-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                           <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                           <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                         </svg>
-                         <span className="hidden sm:inline">Procesando...</span>
-                       </>
-                     ) : (
-                       <>
-                         <svg className="h-5 w-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
-                         </svg>
-                         <span className="hidden sm:inline">Enviar</span>
-                       </>
-                     )}
-                   </button>
+            {input.trim() && !isLoading && (
+              <button
+                type="submit"
+                className="px-6 py-3 font-semibold rounded-xl transition-all duration-200 font-poppins flex items-center justify-center min-w-[100px] shadow-lg text-white hover:shadow-xl transform hover:scale-105"
+                style={{
+                  backgroundColor: 'rgb(52, 152, 219)'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = 'rgb(41, 128, 185)'
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = 'rgb(52, 152, 219)'
+                }}
+              >
+                <svg className="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                </svg>
+                <span>Enviar</span>
+              </button>
+            )}
           </form>
         </div>
       </div>

@@ -3,3 +3,32 @@
 @import '@fontsource/poppins/600.css';
 @import '@fontsource/poppins/700.css';
 @import "tailwindcss";
+
+/* Optimización para mobile - viewport y teclado */
+html {
+  height: 100%;
+  height: -webkit-fill-available;
+}
+
+body {
+  min-height: 100%;
+  min-height: -webkit-fill-available;
+}
+
+/* Ajustes para cuando aparece el teclado en mobile */
+@media (max-width: 768px) {
+  .fixed.bottom-0 {
+    position: fixed !important;
+    bottom: env(keyboard-inset-height, 0px) !important;
+  }
+  
+  /* Asegurar que el contenido sea visible cuando aparece el teclado */
+  main {
+    padding-bottom: env(keyboard-inset-height, 80px);
+  }
+}
+
+/* Safe area para dispositivos con notch */
+.safe-area-pb {
+  padding-bottom: env(safe-area-inset-bottom, 16px);
+}

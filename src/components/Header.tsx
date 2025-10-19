@@ -14,7 +14,7 @@ function Header() {
 
   return (
     <header className={`bg-white shadow-lg z-40 transition-all duration-300 ${
-      isScrolled ? 'fixed top-0 left-0 right-0' : 'relative'
+      isScrolled ? 'fixed top-0 left-0 right-0' : 'relative lg:relative'
     }`}>
       <div className="container mx-auto px-4 transition-all duration-300">
         <div className={`flex items-center transition-all duration-300 ${
