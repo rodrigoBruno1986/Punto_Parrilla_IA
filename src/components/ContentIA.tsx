@@ -235,7 +235,6 @@ function ContentIA() {
     setConversacion(prev => [...prev, nuevaPregunta])
     setInput('') // Limpiar el input
     setIsLoading(true)
-    setIsWaitingDelay(true) // Mostrar que está esperando delay
 
     try {
       // Crear pregunta tipada para el servicio
@@ -246,7 +245,6 @@ function ContentIA() {
       }
 
       // Enviar pregunta al servicio de IA
-      setIsWaitingDelay(false) // Ya no está esperando delay
       const respuestaIA = await enviarPreguntaIA(preguntaIA)
 
       // Simular streaming de la respuesta
@@ -284,7 +282,6 @@ function ContentIA() {
       }, respuestaError.texto.length * 15 + 1000)
     } finally {
       setIsLoading(false)
-      setIsWaitingDelay(false)
     }
   }
 
