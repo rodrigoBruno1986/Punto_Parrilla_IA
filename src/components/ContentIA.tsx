@@ -124,7 +124,6 @@ function ContentIA() {
   const [input, setInput] = useState<string>('')
   const [conversacion, setConversacion] = useState<Array<{ tipo: 'pregunta' | 'respuesta', texto: string, id: string }>>([])
   const [isLoading, setIsLoading] = useState<boolean>(false)
-  const [isWaitingDelay, setIsWaitingDelay] = useState<boolean>(false)
   const [respuestaStreaming, setRespuestaStreaming] = useState<string>('')
   const [isKeyboardOpen, setIsKeyboardOpen] = useState<boolean>(false)
   const chatEndRef = useRef<HTMLDivElement>(null)
